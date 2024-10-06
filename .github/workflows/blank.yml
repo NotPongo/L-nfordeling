@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lønfordeling</title>
+    <script>
+        function calculateDistribution() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const stockAmount = parseFloat(document.getElementById('stockAmountInput').value);
+            const savingPercentage = parseFloat(document.getElementById('savingPercentage').value);
+            
+            if (isNaN(salary) || isNaN(stockAmount) || isNaN(savingPercentage)) {
+                alert("Indtast venligst gyldige tal!");
+                return;
+            }
+
+            if (stockAmount > salary) {
+                alert("Beløb til aktier kan ikke være større end lønnen!");
+                return;
+            }
+
+            const savingAmount = salary * (savingPercentage / 100);
+            const remainingAmount = salary - stockAmount - savingAmount;
+
+            document.getElementById('stockAmount').textContent = stockAmount.toFixed(2) + " kr.";
+            document.getElementById('savingAmount').textContent = savingAmount.toFixed(2) + " kr.";
+            document.getElementById('remainingAmount').textContent = remainingAmount.toFixed(2) + " kr.";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Lønfordeling Beregner</h1>
+
+    <label for="salary">Din Løn (kr.):</label>
+    <input type="number" id="salary" placeholder="Indtast din løn"><br><br>
+
+    <label for="stockAmountInput">Beløb til aktier (kr.):</label>
+    <input type="number" id="stockAmountInput" placeholder="Indtast beløb til aktier"><br><br>
+
+    <label for="savingPercentage">Procent til opsparing (%):</label>
+    <input type="number" id="savingPercentage" placeholder="Indtast procent til opsparing"><br><br>
+
+    <button onclick="calculateDistribution()">Beregn</button>
+
+    <h2>Resultater:</h2>
+    <p>Beløb til aktier: <span id="stockAmount">0 kr.</span></p>
+    <p>Beløb til opsparing: <span id="savingAmount">0 kr.</span></p>
+    <p>Resterende beløb: <span id="remainingAmount">0 kr.</span></p>
+
+</body>
+</html>
